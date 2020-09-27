@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatable" content="ie=edge" />
+        <title>Question Game</title>
+    <link rel="stylesheet" href="./style.css"/>
+  </head>
+
+  <body>
+      <header>
+          <div class="timer">Time: <span id="time">0</span></div>
+
+              <div class="wrapper">
+                  <div class="start" id="start-screen">
+                    <h1>Questions</h1>
+                     <p>
+                      Answer the following questions within the time limit.
+                      </p>
+                      <button id="startBtn">Start</button>
+                 </div>
+                <div id="questions" class="hide">
+                <h2 id="questions-title"></h2>
+                <div id="choices" class="choices"></div>
+            </div>
+        </header>
+      </div>
+
+      <div id="end-screen" class="hide"></div>
+      <h2>All done!</h2>
+      <p>Your final score is <span id="final-score"></span></p>
+      <p>
+          Enter initials: <input type="text" id="initials" max="3" />
+      </p>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
