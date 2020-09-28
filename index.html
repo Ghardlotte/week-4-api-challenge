@@ -5,36 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatable" content="ie=edge" />
         <title>Question Game</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css"/>
   </head>
 
-  <body>
-      <header>
-          <div class="timer">Time: <span id="time">0</span></div>
-
-              <div class="wrapper">
-                  <div class="start" id="start-screen">
-                    <h1>Questions</h1>
-                     <p>
-                      Answer the following questions within the time limit.
-                      </p>
-                      <button id="startBtn">Start</button>
-                 </div>
-                <div id="questions" class="hide">
-                <h2 id="questions-title"></h2>
-                <div id="choices" class="choices"></div>
-            </div>
+  
+    <body>
+        <header class="p-3" style="background-color: #17a2b8">
+            <a href="highscores.html">View High Scores</a>
+            <span id="timer" class="float-right mr-2">Time: 0</span>
         </header>
-      </div>
-
-      <div id="end-screen" class="hide"></div>
-      <h2>All done!</h2>
-      <p>Your final score is <span id="final-score"></span></p>
-      <p>
-          Enter initials: <input type="text" id="initials" max="3" />
-      </p>
-
-    <script src="./script.js"></script>
-    <script src="./questions.js"></script>
-  </body>
+        
+        <div class="container mt-5" id="home">
+            <div class="row justify-content-center mt-5 pt-3 pb-3">
+                <div class="col-10 col-lg-8 text-center">
+                    <h1>JavaScript Quiz</h1> <br>
+                    <p>Try to answer the following questions about coding with JavaScript in 90 seconds. <br>
+                    <strong>NOTE:</strong> If you answer incorrectly, you'll lose some time (10 seconds to be exact)!</p> <br>
+                    <button type="button" id="startBtn" class="btn btn-info btn-lg">START</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mt-5 d-none" id="quiz">
+            <div class="row justify-content-center mt-5 pt-3 pb-3">
+                <div class="col-10 col-lg-8" id="QA-block">
+                    <h3 id="questions" class="mb-4">QUESTION</h3>
+                    <ul id="answers" class="list-unstyled">
+                        <li class="answerChoice">A) </li>
+                        <li class="answerChoice">B) </li>
+                        <li class="answerChoice">C) </li>
+                        <li class="answerChoice">D) </li>
+                    </ul>
+                    <p class="feedback"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mt-5 d-none" id="submit-score">
+            <div class="row justify-content-center mt-5 pt-3 pb-3">
+                <div class="col-10 col-lg-8">
+                    <h2>All Done!</h2>
+                    <p id="user-score"> </p>
+                    <form class="form-group">
+                        <label for="new-score">Enter your name: </label>
+                        <input type="text" id="userName"> 
+                        <button type="button" class="btn btn-info btn-sm submitBtn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="./questions.js"></script>
+        <script src="./script.js"></script>
+    </body>
 </html>

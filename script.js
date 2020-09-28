@@ -62,95 +62,46 @@ function displayScore() {
     userScoreEl.textContent = "Your final score is " + secondsLeft + ".";
 }
 
+startBtn.addEventListener("click", startTimer);
+submitBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    addScore();
+    
+    window.location.href = './highscores.html'
+});
 
-function startQuiz() {
-    var startScreenEl = document.getElementById("start-screen");
-    startScreenEl.setAttribute("class", "hide");
+var newScore = {
+    name: userNameInput,
+    score: secondsLeft};
+
+var highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
+highScores.push(newScore)
+localStorage.setItem("highScores", JSON.stringify(highScores));
 
 
-questionsEl.removeAttribute("class");
-
-timerId = setInterval(clocktick, 1000);
-
-timerEl.textContent = time;
-
-getQuestion();
+function hideFeedback(){
+    var pEl= document.getElementsByClassName("feedback")[0]
+    pEl.style.display='none'
 }
 
-funtion startTimer() {
-
-    document.getElementById("home")
+function showFeedback(){
+    var pEl= document.getElementsByClassName("feedback")[0]
+    pEl.removeAttribute('style');
 }
 
-function time() {
-    var timeLeft = 50;
-  
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function() {
-      if (timeLeft > 1) {
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } else {
-        timerEl.textContent = '';
-        clearInterval(timeInterval);
-        displayMessage();
-      }
-    }, 1000);
-  }
-
-
-if(confirm("clear memory")){
-    localStorage.clear()
-  }
-
-
- 
-
-  function getQuestion() {
-
-    var currentQuestion = questions[currentQuestionindex];
-
-    var titleEl = document.getElementById(question-title);
-    titleEl.textContent = currentQuestion.title;
-
-    choices.innerHTML = "";
-
-    currentQuestion.choices.forEach(function(choice, i) {
-        var choiceNode = document.createElement("button");
-        choiceNode.setAttribute("class", "choice");
-        choiceNode.setAttribute("value", choice);
-    })
-  }
-
-  // We start the game with a score of 0.
-  var score = 0;
-
-  // Loop over every question object
-  for (var i = 0; i < questions.length; i++) {
-    // Display current question to user and ask OK/Cancel
-    //users answer is equal to the result of the confirmation of the question
-    // referring to a property
-    var answer = confirm(questions[i].q);
-    // Compare answers
-    if (
-      (answer === true && questions[i].a === 't') ||
-      (answer === false && questions[i].a === 'f')
-    ) {
-      // Increase score
-      score++;
-      alert('Correct!');
+answerChoices.addEventListener("click", function (event) {
+    var pEl= document.getElementsByClassName("feedback")[0]
+    
+    // evaluation of user's answer choices & feedback
+    if (answer === event.target.textContent) {   
+        pEl.innerHTML = "Correct!";
+        setTimeout(hideFeedback,1000);
+        showFeedback();   
     } else {
-      alert('Wrong!');
-    }
-  }
-  if(score > localStorage.getItem("highScore")){
-    localStorage.setItem("highScore", score)
-    alert("you got a new highscore!!!!!!!!!!!")
-  }
-  // Show total at end
-  alert('You got ' + score + '/' + questions.length);
-
-  startBtn.onclick = time;
+        pEl.innerHTML = "Sorry, that's incorrect.";
+        setTimeout(hideFeedback,1000);
+        secondsLeft = secondsLeft - 10;
+        showFeedback();
+    }    
+    makeQuestions();
+});
