@@ -1,6 +1,3 @@
-var currentQuestionIndex = 0
-var time = question.length * 15;
-var timerId;
 
 //variables for dom
 var questionsEl = document.getElementById("questions");
