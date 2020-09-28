@@ -4,12 +4,64 @@ var timerId;
 
 //variables for dom
 var questionsEl = document.getElementById("questions");
-var timerEl = document.getElementById("time");
+var timerEl = document.getElementById("timer");
 var choicesEl = document.getElementById("choices");
-var submitBtn = document.getElementById("submit");
-var startBtn = document.getElementById("start");
+var submitBtn = document.querySelector("button.submitBtn");
+var startBtn = document.getElementById("startBtn");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+var secondsLeft = (questions.length * 15 + 1);
+var submitScore = document.querySelector("#submit-score");
+var userScore = document.getElementById("user-score");
+var userNameInput;
+var questionhead = document.getElementById("questions");
+var answerChoices = document.getElementById("answers");
+
+var questions = -1;
+var answer;
+
+function startTimer() {
+    document.getElementById("home").classList.add('d-none');
+    document.getElementById("quiz").classList.remove('d-none');
+    setTimer();
+    makeQuestions();
+}
+
+function setTimer() {
+    var countdown = setInterval(function () {
+        secondsLeft--;
+        timerEl.textContent = "time: " + seocondsLeft;
+
+
+        if (secondsLeft === 0 || questionsNumber === question.length) {
+            clearInterval(countdown);
+            setTimeout(displayScore, 500);
+                }
+    }, 1000);
+}
+
+function makeQuestions() {
+    questionNumber++;
+    answer = questions[questionNumber].answer;
+    questionHead.textContent = questions[questionNumber].title;
+    answerChoices.innerHTML = "";
+}
+
+var choices = questions[questionNumber].choices;
+
+for (var q = 0; q < choices.length; q++) {
+    var nextChoice = document.createElement("button");
+
+    nextChoice.textContent = choices[q]
+    answerBtn = answerChoices.appendChild(nextChoice).setAttribute("class", "p-3 m-1 btn btn-light btn-block");
+}
+
+function displayScore() {
+    document.getElementById("quiz").classList.add('d-none');
+    document.getElementById("submit-score").classList.remove('d-none');
+    userScoreEl.textContent = "Your final score is " + secondsLeft + ".";
+}
+
 
 function startQuiz() {
     var startScreenEl = document.getElementById("start-screen");
@@ -23,6 +75,11 @@ timerId = setInterval(clocktick, 1000);
 timerEl.textContent = time;
 
 getQuestion();
+}
+
+funtion startTimer() {
+
+    document.getElementById("home")
 }
 
 function time() {
